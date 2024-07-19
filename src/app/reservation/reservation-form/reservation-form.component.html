@@ -1,33 +1,233 @@
-<form [formGroup]="reservationForm" (ngSubmit)="onReservationSubmit()">
-  <div>
-    <label for="checkin-date">Check-In Date</label>
-    <input type="date" formControlName="checkInDate" id="checkin-date" />
+<form
+  [formGroup]="reservationForm"
+  (ngSubmit)="onSubmit()"
+  class="space-y-4 p-5"
+>
+  <div class="grid gap-4 2xl:grid-cols-2">
+    <div class="space-y-2">
+      <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
+        <label>Check-In Date</label>
+        <ng-container *ngIf="submitted && f['checkInDate'].errors">
+          <span
+            *ngIf="f['checkInDate'].errors['required']"
+            class="text-red-500"
+          >
+            Check-In Date is required
+          </span>
+        </ng-container>
+      </div>
+      <input
+        type="date"
+        formControlName="checkInDate"
+        id="checkInDate"
+        class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
+          submitted && f['checkInDate'].errors
+            ? 'outline-red-500'
+            : 'outline-slate-500'
+        }}"
+      />
+    </div>
+
+    <div class="space-y-2">
+      <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
+        <label>Check-Out Date</label>
+        <ng-container *ngIf="submitted && f['checkOutDate'].errors">
+          <span
+            *ngIf="f['checkOutDate'].errors['required']"
+            class="text-red-500"
+          >
+            Check-In Date is required
+          </span>
+        </ng-container>
+      </div>
+      <input
+        type="date"
+        formControlName="checkOutDate"
+        id="checkOutDate"
+        class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
+          submitted && f['checkOutDate'].errors
+            ? 'outline-red-500'
+            : 'outline-slate-500'
+        }}"
+      />
+    </div>
+
+    <div class="space-y-2">
+      <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
+        <label>Guest Name</label>
+        <ng-container *ngIf="submitted && f['guestName'].errors">
+          <span *ngIf="f['guestName'].errors['required']" class="text-red-500">
+            Guest name is required
+          </span>
+        </ng-container>
+      </div>
+      <input
+        type="text"
+        formControlName="guestName"
+        id="guestName"
+        class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
+          submitted && f['guestName'].errors
+            ? 'outline-red-500'
+            : 'outline-slate-500'
+        }}"
+      />
+    </div>
+
+    <div class="space-y-2">
+      <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
+        <label>Guest Email</label>
+        <ng-container *ngIf="submitted && f['guestEmail'].errors">
+          <span *ngIf="f['guestEmail'].errors['required']" class="text-red-500">
+            Guest Email is required
+          </span>
+          <span *ngIf="f['guestEmail'].errors['email']" class="text-red-500">
+            Guest Email is invalid
+          </span>
+        </ng-container>
+      </div>
+      <input
+        autocomplete="false"
+        type="email"
+        formControlName="guestEmail"
+        id="guestEmail"
+        class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
+          submitted && f['guestEmail'].errors
+            ? 'outline-red-500'
+            : 'outline-slate-500'
+        }}"
+      />
+    </div>
+
+    <div class="form-group">
+      <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
+        <label>Password</label>
+        <ng-container *ngIf="submitted && f['guestPassword'].errors">
+          <span
+            *ngIf="f['guestPassword'].errors['required']"
+            class="text-red-500"
+          >
+            Password is required
+          </span>
+          <!-- <span *ngIf="f['guestPassword'].errors['minlength']" class="text-red-500">
+            Password must be at least 6 characters
+          </span>
+          <span *ngIf="f['guestPassword'].errors['maxlength']" class="text-red-500">
+            Password must not exceed 40 characters
+          </span> -->
+          <span
+            *ngIf="f['guestPassword'].errors['pattern']"
+            class="text-red-500"
+          >
+            Confirm Password should have min. 6 & max. 40 characters, atleast 1
+            uppercase, lowercase, number & special characters.
+          </span>
+        </ng-container>
+      </div>
+      <input
+        autocomplete="false"
+        type="password"
+        formControlName="guestPassword"
+        id="guestPassword"
+        class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
+          submitted && f['guestPassword'].errors
+            ? 'outline-red-500'
+            : 'outline-slate-500'
+        }}"
+      />
+    </div>
+
+    <div class="form-group">
+      <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
+        <label>Confirm Password</label>
+        <ng-container *ngIf="submitted && f['guestPasswordConfirm'].errors">
+          <span
+            *ngIf="f['guestPasswordConfirm'].errors['required']"
+            class="text-red-500"
+          >
+            Confirm Password is required
+          </span>
+          <!-- <span *ngIf="f['guestPasswordConfirm'].errors['minlength']" class="text-red-500">
+            Confirm Password must be at least 6 characters
+          </span>
+          <span *ngIf="f['guestPasswordConfirm'].errors['maxlength']" class="text-red-500">
+            Confirm Password must not exceed 40 characters
+          </span> -->
+          <span
+            *ngIf="f['guestPasswordConfirm'].errors['pattern']"
+            class="text-red-500"
+          >
+            Confirm Password should have min. 6 & max. 40 characters, atleast 1
+            uppercase, 1 lowercase, 1 number & 1 special character.
+          </span>
+          <div *ngIf="f['guestPasswordConfirm'].errors['matching']">
+            Confirm Password does not match
+          </div>
+        </ng-container>
+      </div>
+      <input
+        autocomplete="false"
+        type="password"
+        formControlName="guestPasswordConfirm"
+        id="guestPasswordConfirm"
+        class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
+          submitted && f['guestPasswordConfirm'].errors
+            ? 'outline-red-500'
+            : 'outline-slate-500'
+        }}"
+      />
+    </div>
+
+    <div class="space-y-2">
+      <label>Guest Phone</label>
+      <input
+        type="tel"
+        formControlName="guestPhone"
+        id="guestPhone"
+        class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
+          submitted && f['guestPhone'].errors
+            ? 'outline-red-500'
+            : 'outline-slate-500'
+        }}"
+      />
+    </div>
+
+    <div class="space-y-2">
+      <label>Guest Room</label>
+      <input
+        type="number"
+        formControlName="guestRoom"
+        id="guestRoom"
+        class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
+          submitted && f['guestRoom'].errors
+            ? 'outline-red-500'
+            : 'outline-slate-500'
+        }}"
+      />
+    </div>
+
+    <div class="space-x-2">
+      <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" />
+      <label
+        for="acceptTerms"
+        class="{{ submitted && f['guestName'].errors ? 'text-red-500' : '' }}"
+        >I have read and agree to the Terms</label
+      >
+    </div>
   </div>
 
-  <div>
-    <label for="checkout-date">Check-Out Date</label>
-    <input type="date" formControlName="checkOutDate" id="checkout-date" />
+  <div class="flex gap-x-4 justify-end">
+    <button
+      type="button"
+      (click)="onReset()"
+      class="max-2xl:min-w-20 2xl:min-w-40 rounded-md p-2 outline outline-1 outline-red-500"
+    >
+      Reset
+    </button>
+    <button
+      type="submit"
+      class="max-2xl:min-w-20 2xl:min-w-40 rounded-md p-2 border border-teal-500"
+    >
+      Save
+    </button>
   </div>
-
-  <div>
-    <label for="guest-name">Guest Name</label>
-    <input type="text" formControlName="guestName" id="guest-name" />
-  </div>
-
-  <div>
-    <label for="guest-email">Guest Email</label>
-    <input type="email" formControlName="guestEmail" id="guest-email" />
-  </div>
-
-  <div>
-    <label for="guest-phone">Guest Phone</label>
-    <input type="tel" formControlName="guestPhone" id="guest-phone" />
-  </div>
-
-  <div>
-    <label for="guest-room">Guest Room</label>
-    <input type="text" formControlName="guestRoom" id="guest-room" />
-  </div>
-
-  <button type="submit">Save</button>
 </form>

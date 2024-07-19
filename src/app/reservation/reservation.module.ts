@@ -1,9 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 import { ReservationFormComponent } from './reservation-form/reservation-form.component';
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
 import { ReservationRoutingModule } from './reservation-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    FormsModule,
+    SharedModule,
     ReactiveFormsModule,
     ReservationRoutingModule
   ]

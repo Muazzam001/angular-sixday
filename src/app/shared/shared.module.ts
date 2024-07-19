@@ -12,28 +12,39 @@ import { LocalizedTimePipe } from './pipes/localized-time.pipe';
 import { LocalizedDatePipe } from './pipes/localized-date.pipe';
 import { LocalizedDateTimePipe } from './pipes/localized-date-time.pipe';
 import { LocalizedNumberPipe } from './pipes/localized-number.pipe';
+import { PlaceholderImgComponent } from '../components/placeholder-img/placeholder-img.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
+
+    // Pipes
     SortPipe,
     NumberOnlyDirective,
     AlphabetOnlyDirective,
     AlphaNumericOnlyDirective,
     ReplaceNullWithDashPipe,
-    NavigationComponent,
     DomChangedDirective,
     LocalizedTimePipe,
     LocalizedDatePipe,
     LocalizedDateTimePipe,
-    LocalizedNumberPipe
+    LocalizedNumberPipe,
+    // Components
+    PlaceholderImgComponent,
+    NavigationComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
+    HttpClientModule,
   ],
   exports: [
-    NavigationComponent
+    // Components
+    PlaceholderImgComponent,
+    NavigationComponent,
   ],
   providers: [
     SortPipe
