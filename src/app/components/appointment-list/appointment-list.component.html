@@ -1,0 +1,54 @@
+<div class="grid grid-cols-5 gap-x-4 max-w-5xl mx-auto items-center mt-5">
+  <div class="col-span-2">
+    <input
+      [(ngModel)]="newAppointmentTitle"
+      type="text"
+      placeholder="Enter appointment title"
+      name="appointment-title"
+      id="appointment-title"
+      class="w-full col-span-2 p-2 rounded-md outline outline-1 outline-slate-500"
+    />
+  </div>
+
+  <div class="col-span-2">
+    <input
+      [(ngModel)]="newAppointmentDate"
+      type="date"
+      placeholder="Enter appointment date"
+      name="appointment-date"
+      id="appointment-date"
+      class="w-full p-2 rounded-md outline outline-1 outline-slate-500"
+    />
+  </div>
+
+  <div class="col-span-1 justify-self-center">
+    <button
+      (click)="addAppointment()"
+      type="button"
+      class="min-w-40 rounded-md p-2 border border-teal-500"
+    >
+      Add
+    </button>
+  </div>
+</div>
+
+<ul class="flex flex-col gap-y-4 max-w-5xl mx-auto mt-5">
+  <li
+    *ngFor="let appointment of appointments; index as i"
+    class="w-full grid grid-cols-5 gap-x-4"
+  >
+    <div class="col-span-4 grid grid-cols-2 gap-x-2">
+      <span>{{ appointment.title }}</span>
+      <span>{{ appointment.date | date : "dd-MM-yyyy" }}</span>
+    </div>
+
+    <div class="col-span-1 justify-self-center">
+      <button
+        (click)="deletAppointment(i)"
+        class="min-w-40 rounded-md p-2 outline outline-1 outline-red-500"
+      >
+        Delete
+      </button>
+    </div>
+  </li>
+</ul>

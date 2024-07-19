@@ -1,0 +1,49 @@
+export class CultureCode {
+  static en = 'en';
+  static ru = 'ru';
+  static dk = 'dk';
+  static da = 'da';
+  static no = 'no';
+  static nb = 'nb';
+  static se = 'se';
+  static sv = 'sv';
+  static ro = 'ro';
+  static sk = 'sk';
+  static de = 'de';
+  static in = 'en';
+  static sl = 'sl';
+  static bg = 'bg';
+  static hr = 'hr';
+  static sr = 'sr';
+  static mk = 'mk';
+  static xk = 'xk';
+  static al = 'al';
+  static ba = 'ba';
+  static me = 'me';
+  static default = 'en';
+}
+
+export class Locale {
+  static gb = 'en-gb';
+  static ru = 'ru';
+  static dk = 'dk';
+  static da = 'da';
+  static no = 'no';
+  static nb = 'nb';
+  static se = 'se';
+  static sv = 'sv';
+  static ro = 'ro';
+  static sk = 'sk';
+  static de = 'de';
+  static in = 'en-in';
+  static sl = 'sl';
+  static bg = 'bg';
+  static hr = 'hr';
+  static sr = 'sr';
+  static mk = 'mk';
+  static xk = 'sq-XK';
+  static al = 'al';
+  static ba = 'ba';
+  static me = 'me';
+  static default = 'en-gb';
+}
