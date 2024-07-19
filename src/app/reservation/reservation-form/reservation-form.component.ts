@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StrongPasswordRegx } from 'src/app/shared/constants/regex';
 import Validation from 'src/app/shared/utils/validation';
+import { dateRangeValidator } from 'src/app/shared/validators/dateRange';
 
 @Component({
   selector: 'app-reservation-form',
@@ -62,7 +63,8 @@ export class ReservationFormComponent implements OnInit {
           [
             Validators.required,
             Validators.email,
-            Validators.nullValidator],
+            Validators.nullValidator
+          ],
         ],
         guestPassword: [
           '',
@@ -82,13 +84,14 @@ export class ReservationFormComponent implements OnInit {
             Validators.minLength(6),
             Validators.maxLength(40),
             Validators.pattern(StrongPasswordRegx),
-          ]
+          ],
         ],
         guestPhone: [
           '',
           [
             Validators.required,
             Validators.nullValidator,
+            // Validators.pattern('^[- +()0-9]{6,}+$'),
           ],
         ],
         guestRoom: [
@@ -101,12 +104,16 @@ export class ReservationFormComponent implements OnInit {
         acceptTerms: [
           false,
           [
+            // Validators.required,
             Validators.requiredTrue,
           ]
         ],
       },
       {
-        validators: [Validation.match('guestPassword', 'guestPasswordConfirm')],
+        validators: [
+          Validation.match('guestPassword', 'guestPasswordConfirm'),
+          // dateRangeValidator('checkInDate', 'checkOutDate')
+        ],
       }
     );
   }

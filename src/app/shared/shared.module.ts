@@ -15,6 +15,7 @@ import { LocalizedNumberPipe } from './pipes/localized-number.pipe';
 import { PlaceholderImgComponent } from '../components/placeholder-img/placeholder-img.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { PasswordStrengthDirective } from './directives/password-strength.directive';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { FormsModule } from '@angular/forms';
     // Components
     PlaceholderImgComponent,
     NavigationComponent,
+    PasswordStrengthDirective,
   ],
   imports: [
     CommonModule,

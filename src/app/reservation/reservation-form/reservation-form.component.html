@@ -7,14 +7,11 @@
     <div class="space-y-2">
       <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
         <label>Check-In Date</label>
-        <ng-container *ngIf="submitted && f['checkInDate'].errors">
-          <span
-            *ngIf="f['checkInDate'].errors['required']"
-            class="text-red-500"
-          >
-            Check-In Date is required
-          </span>
-        </ng-container>
+        <span *ngIf="submitted && f['checkInDate'].errors" class="text-red-500">
+          (<ng-container *ngIf="f['checkInDate'].errors['required']"
+            >Check-In Date is required</ng-container
+          >)
+        </span>
       </div>
       <input
         type="date"
@@ -31,14 +28,20 @@
     <div class="space-y-2">
       <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
         <label>Check-Out Date</label>
-        <ng-container *ngIf="submitted && f['checkOutDate'].errors">
-          <span
-            *ngIf="f['checkOutDate'].errors['required']"
-            class="text-red-500"
+        <span
+          *ngIf="submitted && f['checkOutDate'].errors"
+          class="text-red-500"
+        >
+          (<ng-container *ngIf="f['checkOutDate'].errors['required']"
+            >Check-Out Date is required</ng-container
           >
-            Check-In Date is required
-          </span>
-        </ng-container>
+          <!--
+          <ng-container *ngIf="f['checkOutDate'].errors?.['startDateEndDate']">
+            Check-In Date must be before Check-Out Date.
+          </ng-container>
+          -->
+          )
+        </span>
       </div>
       <input
         type="date"
@@ -55,11 +58,11 @@
     <div class="space-y-2">
       <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
         <label>Guest Name</label>
-        <ng-container *ngIf="submitted && f['guestName'].errors">
-          <span *ngIf="f['guestName'].errors['required']" class="text-red-500">
-            Guest name is required
-          </span>
-        </ng-container>
+        <span *ngIf="submitted && f['guestName'].errors" class="text-red-500">
+          (<ng-container *ngIf="f['guestName'].errors['required']"
+            >Guest name is required</ng-container
+          >)
+        </span>
       </div>
       <input
         type="text"
@@ -76,17 +79,17 @@
     <div class="space-y-2">
       <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
         <label>Guest Email</label>
-        <ng-container *ngIf="submitted && f['guestEmail'].errors">
-          <span *ngIf="f['guestEmail'].errors['required']" class="text-red-500">
-            Guest Email is required
-          </span>
-          <span *ngIf="f['guestEmail'].errors['email']" class="text-red-500">
-            Guest Email is invalid
-          </span>
-        </ng-container>
+        <span *ngIf="submitted && f['guestEmail'].errors" class="text-red-500">
+          (<ng-container *ngIf="f['guestEmail'].errors['required']"
+            >Guest Email is required</ng-container
+          >
+          <ng-container *ngIf="f['guestEmail'].errors['email']"
+            >Guest Email is invalid</ng-container
+          >)
+        </span>
       </div>
       <input
-        autocomplete="false"
+        autocomplete="off"
         type="email"
         formControlName="guestEmail"
         id="guestEmail"
@@ -98,33 +101,28 @@
       />
     </div>
 
-    <div class="form-group">
+    <div class="space-y-2">
       <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
         <label>Password</label>
-        <ng-container *ngIf="submitted && f['guestPassword'].errors">
-          <span
-            *ngIf="f['guestPassword'].errors['required']"
-            class="text-red-500"
+        <span
+          *ngIf="submitted && f['guestPassword'].errors"
+          class="text-red-500"
+        >
+          (<ng-container *ngIf="f['guestPassword'].errors['required']"
+            >Password is required</ng-container
           >
-            Password is required
-          </span>
-          <!-- <span *ngIf="f['guestPassword'].errors['minlength']" class="text-red-500">
-            Password must be at least 6 characters
-          </span>
-          <span *ngIf="f['guestPassword'].errors['maxlength']" class="text-red-500">
-            Password must not exceed 40 characters
-          </span> -->
-          <span
-            *ngIf="f['guestPassword'].errors['pattern']"
-            class="text-red-500"
-          >
-            Confirm Password should have min. 6 & max. 40 characters, atleast 1
-            uppercase, lowercase, number & special characters.
-          </span>
-        </ng-container>
+          <!--
+          <ng-container *ngIf="f['guestPassword'].errors['minlength']" class="text-red-500">Password must be at least 6 characters.</ng-container>
+          <ng-container *ngIf="f['guestPassword'].errors['maxlength']" class="text-red-500">Password must not exceed 40 characters.</ng-container>
+          -->
+          <ng-container *ngIf="f['guestPassword'].errors['pattern']"
+            >Confirm Password should have min. 6 & max. 40 characters, atleast 1
+            uppercase, lowercase, number & special characters</ng-container
+          >)
+        </span>
       </div>
       <input
-        autocomplete="false"
+        autocomplete="off"
         type="password"
         formControlName="guestPassword"
         id="guestPassword"
@@ -136,36 +134,31 @@
       />
     </div>
 
-    <div class="form-group">
+    <div class="space-y-2">
       <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
         <label>Confirm Password</label>
-        <ng-container *ngIf="submitted && f['guestPasswordConfirm'].errors">
-          <span
-            *ngIf="f['guestPasswordConfirm'].errors['required']"
-            class="text-red-500"
+        <span
+          *ngIf="submitted && f['guestPasswordConfirm'].errors"
+          class="text-red-500"
+        >
+          (<ng-container *ngIf="f['guestPasswordConfirm'].errors['required']"
+            >Confirm Password is required</ng-container
           >
-            Confirm Password is required
-          </span>
-          <!-- <span *ngIf="f['guestPasswordConfirm'].errors['minlength']" class="text-red-500">
-            Confirm Password must be at least 6 characters
-          </span>
-          <span *ngIf="f['guestPasswordConfirm'].errors['maxlength']" class="text-red-500">
-            Confirm Password must not exceed 40 characters
-          </span> -->
-          <span
-            *ngIf="f['guestPasswordConfirm'].errors['pattern']"
-            class="text-red-500"
+          <!--
+          <ng-container *ngIf="f['guestPasswordConfirm'].errors['minlength']">Confirm Password must be at least 6 characters</ng-container>
+          <ng-container *ngIf="f['guestPasswordConfirm'].errors['maxlength']">Confirm Password must not exceed 40 characters</ng-container>
+          -->
+          <ng-container *ngIf="f['guestPasswordConfirm'].errors['pattern']"
+            >Confirm Password should have min. 6 & max. 40 characters, atleast 1
+            uppercase, 1 lowercase, 1 number & 1 special character</ng-container
           >
-            Confirm Password should have min. 6 & max. 40 characters, atleast 1
-            uppercase, 1 lowercase, 1 number & 1 special character.
-          </span>
-          <div *ngIf="f['guestPasswordConfirm'].errors['matching']">
-            Confirm Password does not match
-          </div>
-        </ng-container>
+          <ng-container *ngIf="f['guestPasswordConfirm'].errors['matching']"
+            >Confirm Password does not match</ng-container
+          >)
+        </span>
       </div>
       <input
-        autocomplete="false"
+        autocomplete="off"
         type="password"
         formControlName="guestPasswordConfirm"
         id="guestPasswordConfirm"
@@ -178,8 +171,19 @@
     </div>
 
     <div class="space-y-2">
-      <label>Guest Phone</label>
+      <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
+        <label>Guest Phone</label>
+        <span *ngIf="submitted && f['guestPhone'].errors" class="text-red-500">
+          (<ng-container *ngIf="f['guestPhone'].errors['required']"
+            >Guest Phone is required</ng-container
+          >
+          <ng-container *ngIf="f['guestPhone'].errors['tel']"
+            >Guest Phone is invalid</ng-container
+          >)
+        </span>
+      </div>
       <input
+        autocomplete="off"
         type="tel"
         formControlName="guestPhone"
         id="guestPhone"
@@ -192,7 +196,17 @@
     </div>
 
     <div class="space-y-2">
-      <label>Guest Room</label>
+      <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
+        <label>Guest Room</label>
+        <span *ngIf="submitted && f['guestRoom'].errors" class="text-red-500">
+          (<ng-container *ngIf="f['guestRoom'].errors['required']"
+            >Guest Room is required</ng-container
+          >
+          <ng-container *ngIf="f['guestRoom'].errors['number']"
+            >Guest Room is invalid</ng-container
+          >)
+        </span>
+      </div>
       <input
         type="number"
         formControlName="guestRoom"
@@ -209,7 +223,7 @@
       <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" />
       <label
         for="acceptTerms"
-        class="{{ submitted && f['guestName'].errors ? 'text-red-500' : '' }}"
+        class="{{ submitted && f['acceptTerms'].errors ? 'text-red-500' : '' }}"
         >I have read and agree to the Terms</label
       >
     </div>
