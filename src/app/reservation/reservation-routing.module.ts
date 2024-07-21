@@ -16,6 +16,10 @@ const routes: Routes = [
     path: 'create',
     component: ReservationFormComponent
   },
+  {
+    path: 'edit/:id',
+    component: ReservationFormComponent
+  },
 ];
 
 @NgModule({

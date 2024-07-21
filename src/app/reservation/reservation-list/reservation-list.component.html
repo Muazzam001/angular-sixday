@@ -1,2 +1,119 @@
-<p>reservation-list works!</p>
-Update
+<div class="space-y-4 p-5">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="text-base font-semibold leading-6 text-gray-900">
+        Reservation List
+      </h1>
+    </div>
+    <div class="sm:ml-16 sm:flex-none">
+      <button
+        type="button"
+        (click)="newReservation()"
+        class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      >
+        Add Reservation
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="px-4 sm:px-6 lg:px-8 space-y-8"
+    *ngIf="reservations.length > 0; else noReservation"
+  >
+    <div class="flow-root">
+      <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+          <table class="min-w-full divide-y divide-gray-300">
+            <thead>
+              <tr>
+                <th
+                  scope="col"
+                  class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
+                >
+                  Guest Name
+                </th>
+                <th
+                  scope="col"
+                  class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                >
+                  Guest Email
+                </th>
+                <th
+                  scope="col"
+                  class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                >
+                  Guest Phone
+                </th>
+                <th
+                  scope="col"
+                  class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                >
+                  Guest Room #
+                </th>
+                <th
+                  scope="col"
+                  class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                >
+                  Check-In Date
+                </th>
+                <th
+                  scope="col"
+                  class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                >
+                  Check-Out Date
+                </th>
+
+                <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr *ngFor="let reservation of reservations; let i = index">
+                <td
+                  class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
+                >
+                  {{ reservation.guestName }}
+                </td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                  {{ reservation.guestEmail }}
+                </td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                  {{ reservation.guestPhone }}
+                </td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                  {{ reservation.guestRoom }}
+                </td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                  {{ reservation.checkInDate }}
+                </td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                  {{ reservation.checkOutDate }}
+                </td>
+                <td
+                  class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0 space-x-4"
+                >
+                  <!-- [routerLink]="['reservation/edit', reservation.id]" -->
+                  <span
+                    (click)="editReservation(reservation.id)"
+                    class="text-red-500 hover:text-red-900"
+                    >Edit</span
+                  >
+                  <span
+                    (click)="deleteReservation(reservation.id)"
+                    class="text-red-500 hover:text-red-900"
+                    >Delete</span
+                  >
+                </td>
+              </tr>
+
+              <!-- More people... -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noReservation> No Reservations recorded. </ng-template>
+</div>

@@ -1,248 +1,335 @@
-<form
-  [formGroup]="reservationForm"
-  (ngSubmit)="onSubmit()"
-  class="space-y-4 p-5"
->
-  <div class="grid gap-4 2xl:grid-cols-2">
-    <div class="space-y-2">
-      <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
-        <label>Check-In Date</label>
-        <span *ngIf="submitted && f['checkInDate'].errors" class="text-red-500">
-          (<ng-container *ngIf="f['checkInDate'].errors['required']"
-            >Check-In Date is required</ng-container
-          >)
-        </span>
-      </div>
-      <input
-        type="date"
-        formControlName="checkInDate"
-        id="checkInDate"
-        class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
-          submitted && f['checkInDate'].errors
-            ? 'outline-red-500'
-            : 'outline-slate-500'
-        }}"
-      />
-    </div>
+<div class="space-y-4 p-5">
+  <h1 class="text-base font-semibold leading-6 text-gray-900">
+    Create New Reservation
+  </h1>
 
-    <div class="space-y-2">
-      <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
-        <label>Check-Out Date</label>
-        <span
-          *ngIf="submitted && f['checkOutDate'].errors"
-          class="text-red-500"
-        >
-          (<ng-container *ngIf="f['checkOutDate'].errors['required']"
-            >Check-Out Date is required</ng-container
+  <form
+    [formGroup]="reservationForm"
+    (ngSubmit)="onSubmit()"
+    class="space-y-4"
+  >
+    <div class="grid gap-4 2xl:grid-cols-2">
+      <div class="space-y-2">
+        <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
+          <label
+            >Check-In Date
+            <span *ngIf="f['checkInDate'].invalid" class="text-red-500"
+              >*</span
+            ></label
           >
-          <!--
+          <span
+            *ngIf="
+              (submitted || f['checkInDate'].touched) && f['checkInDate'].errors
+            "
+            class="text-red-500"
+          >
+            (<ng-container *ngIf="f['checkInDate'].errors['required']"
+              >Check-In Date is required</ng-container
+            >)
+          </span>
+        </div>
+        <input
+          type="date"
+          formControlName="checkInDate"
+          id="checkInDate"
+          class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
+            (submitted || f['checkInDate'].touched) && f['checkInDate'].errors
+              ? 'outline-red-500'
+              : 'outline-slate-500'
+          }}"
+        />
+      </div>
+
+      <div class="space-y-2">
+        <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
+          <label
+            >Check-Out Date
+            <span *ngIf="f['checkOutDate'].invalid" class="text-red-500"
+              >*</span
+            ></label
+          >
+          <span
+            *ngIf="
+              (submitted || f['checkOutDate'].touched) &&
+              f['checkOutDate'].errors
+            "
+            class="text-red-500"
+          >
+            (<ng-container
+              *ngIf="
+                f['checkOutDate'].errors['required'] ||
+                f['checkOutDate'].touched
+              "
+              >Check-Out Date is required</ng-container
+            >
+            <!--
           <ng-container *ngIf="f['checkOutDate'].errors?.['startDateEndDate']">
             Check-In Date must be before Check-Out Date.
           </ng-container>
           -->
-          )
-        </span>
+            )
+          </span>
+        </div>
+        <input
+          type="date"
+          formControlName="checkOutDate"
+          id="checkOutDate"
+          class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
+            (submitted || f['checkOutDate'].touched) && f['checkOutDate'].errors
+              ? 'outline-red-500'
+              : 'outline-slate-500'
+          }}"
+        />
       </div>
-      <input
-        type="date"
-        formControlName="checkOutDate"
-        id="checkOutDate"
-        class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
-          submitted && f['checkOutDate'].errors
-            ? 'outline-red-500'
-            : 'outline-slate-500'
-        }}"
-      />
-    </div>
 
-    <div class="space-y-2">
-      <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
-        <label>Guest Name</label>
-        <span *ngIf="submitted && f['guestName'].errors" class="text-red-500">
-          (<ng-container *ngIf="f['guestName'].errors['required']"
-            >Guest name is required</ng-container
-          >)
-        </span>
-      </div>
-      <input
-        type="text"
-        formControlName="guestName"
-        id="guestName"
-        class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
-          submitted && f['guestName'].errors
-            ? 'outline-red-500'
-            : 'outline-slate-500'
-        }}"
-      />
-    </div>
-
-    <div class="space-y-2">
-      <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
-        <label>Guest Email</label>
-        <span *ngIf="submitted && f['guestEmail'].errors" class="text-red-500">
-          (<ng-container *ngIf="f['guestEmail'].errors['required']"
-            >Guest Email is required</ng-container
+      <div class="space-y-2">
+        <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
+          <label
+            >Guest Name
+            <span *ngIf="f['guestName'].invalid" class="text-red-500"
+              >*</span
+            ></label
           >
-          <ng-container *ngIf="f['guestEmail'].errors['email']"
-            >Guest Email is invalid</ng-container
-          >)
-        </span>
-      </div>
-      <input
-        autocomplete="off"
-        type="email"
-        formControlName="guestEmail"
-        id="guestEmail"
-        class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
-          submitted && f['guestEmail'].errors
-            ? 'outline-red-500'
-            : 'outline-slate-500'
-        }}"
-      />
-    </div>
-
-    <div class="space-y-2">
-      <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
-        <label>Password</label>
-        <span
-          *ngIf="submitted && f['guestPassword'].errors"
-          class="text-red-500"
-        >
-          (<ng-container *ngIf="f['guestPassword'].errors['required']"
-            >Password is required</ng-container
+          <span
+            *ngIf="
+              (submitted || f['guestName'].touched) && f['guestName'].errors
+            "
+            class="text-red-500"
           >
-          <!--
+            (<ng-container *ngIf="f['guestName'].errors['required']"
+              >Guest name is required</ng-container
+            >)
+          </span>
+        </div>
+        <input
+          type="text"
+          formControlName="guestName"
+          id="guestName"
+          class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
+            (submitted || f['guestName'].touched) && f['guestName'].errors
+              ? 'outline-red-500'
+              : 'outline-slate-500'
+          }}"
+        />
+      </div>
+
+      <div class="space-y-2">
+        <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
+          <label
+            >Guest Email
+            <span *ngIf="f['guestEmail'].invalid" class="text-red-500"
+              >*</span
+            ></label
+          >
+          <span
+            *ngIf="
+              (submitted || f['guestEmail'].touched) && f['guestEmail'].errors
+            "
+            class="text-red-500"
+          >
+            (<ng-container *ngIf="f['guestEmail'].errors['required']"
+              >Guest Email is required</ng-container
+            >
+            <ng-container *ngIf="f['guestEmail'].errors['email']"
+              >Guest Email is invalid</ng-container
+            >)
+          </span>
+        </div>
+        <input
+          autocomplete="off"
+          type="email"
+          formControlName="guestEmail"
+          id="guestEmail"
+          class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
+            (submitted || f['guestEmail'].touched) && f['guestEmail'].errors
+              ? 'outline-red-500'
+              : 'outline-slate-500'
+          }}"
+        />
+      </div>
+
+      <div class="space-y-2">
+        <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
+          <label
+            >Password
+            <span *ngIf="f['guestPassword'].invalid" class="text-red-500"
+              >*</span
+            ></label
+          >
+          <span
+            *ngIf="
+              (submitted || f['guestPassword'].touched) &&
+              f['guestPassword'].errors
+            "
+            class="text-red-500"
+          >
+            (<ng-container *ngIf="f['guestPassword'].errors['required']"
+              >Password is required</ng-container
+            >
+            <!--
           <ng-container *ngIf="f['guestPassword'].errors['minlength']" class="text-red-500">Password must be at least 6 characters.</ng-container>
           <ng-container *ngIf="f['guestPassword'].errors['maxlength']" class="text-red-500">Password must not exceed 40 characters.</ng-container>
           -->
-          <ng-container *ngIf="f['guestPassword'].errors['pattern']"
-            >Confirm Password should have min. 6 & max. 40 characters, atleast 1
-            uppercase, lowercase, number & special characters</ng-container
-          >)
-        </span>
+            <ng-container *ngIf="f['guestPassword'].errors['pattern']"
+              >Password should have min. 6 & max. 40 characters, atleast 1
+              uppercase, 1 lowercase, 1 number & 1 special
+              character</ng-container
+            >)
+          </span>
+        </div>
+        <input
+          autocomplete="off"
+          type="password"
+          formControlName="guestPassword"
+          id="guestPassword"
+          class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
+            (submitted || f['guestPassword'].touched) &&
+            f['guestPassword'].errors
+              ? 'outline-red-500'
+              : 'outline-slate-500'
+          }}"
+        />
       </div>
-      <input
-        autocomplete="off"
-        type="password"
-        formControlName="guestPassword"
-        id="guestPassword"
-        class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
-          submitted && f['guestPassword'].errors
-            ? 'outline-red-500'
-            : 'outline-slate-500'
-        }}"
-      />
-    </div>
 
-    <div class="space-y-2">
-      <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
-        <label>Confirm Password</label>
-        <span
-          *ngIf="submitted && f['guestPasswordConfirm'].errors"
-          class="text-red-500"
-        >
-          (<ng-container *ngIf="f['guestPasswordConfirm'].errors['required']"
-            >Confirm Password is required</ng-container
+      <div class="space-y-2">
+        <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
+          <label
+            >Confirm Password
+            <span *ngIf="f['guestPasswordConfirm'].invalid" class="text-red-500"
+              >*</span
+            ></label
           >
-          <!--
+          <span
+            *ngIf="
+              (submitted || f['guestPasswordConfirm'].touched) &&
+              f['guestPasswordConfirm'].errors
+            "
+            class="text-red-500"
+          >
+            (<ng-container *ngIf="f['guestPasswordConfirm'].errors['required']"
+              >Confirm Password is required</ng-container
+            >
+            <!--
           <ng-container *ngIf="f['guestPasswordConfirm'].errors['minlength']">Confirm Password must be at least 6 characters</ng-container>
           <ng-container *ngIf="f['guestPasswordConfirm'].errors['maxlength']">Confirm Password must not exceed 40 characters</ng-container>
           -->
-          <ng-container *ngIf="f['guestPasswordConfirm'].errors['pattern']"
-            >Confirm Password should have min. 6 & max. 40 characters, atleast 1
-            uppercase, 1 lowercase, 1 number & 1 special character</ng-container
-          >
-          <ng-container *ngIf="f['guestPasswordConfirm'].errors['matching']"
-            >Confirm Password does not match</ng-container
-          >)
-        </span>
+            <ng-container *ngIf="f['guestPasswordConfirm'].errors['pattern']"
+              >Confirm Password should have min. 6 & max. 40 characters, atleast
+              1 uppercase, 1 lowercase, 1 number & 1 special
+              character</ng-container
+            >
+            <ng-container *ngIf="f['guestPasswordConfirm'].errors['matching']"
+              >Confirm Password does not match</ng-container
+            >)
+          </span>
+        </div>
+        <input
+          autocomplete="off"
+          type="password"
+          formControlName="guestPasswordConfirm"
+          id="guestPasswordConfirm"
+          class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
+            (submitted || f['guestPasswordConfirm'].touched) &&
+            f['guestPasswordConfirm'].errors
+              ? 'outline-red-500'
+              : 'outline-slate-500'
+          }}"
+        />
       </div>
-      <input
-        autocomplete="off"
-        type="password"
-        formControlName="guestPasswordConfirm"
-        id="guestPasswordConfirm"
-        class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
-          submitted && f['guestPasswordConfirm'].errors
-            ? 'outline-red-500'
-            : 'outline-slate-500'
-        }}"
-      />
+
+      <div class="space-y-2">
+        <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
+          <label>Guest Phone</label>
+          <span
+            *ngIf="
+              (submitted || f['guestPhone'].touched) && f['guestPhone'].errors
+            "
+            class="text-red-500"
+          >
+            (<ng-container *ngIf="f['guestPhone'].errors['required']"
+              >Guest Phone is required</ng-container
+            >
+            <ng-container *ngIf="f['guestPhone'].errors['tel']"
+              >Guest Phone is invalid</ng-container
+            >)
+          </span>
+        </div>
+        <input
+          autocomplete="off"
+          type="tel"
+          formControlName="guestPhone"
+          id="guestPhone"
+          class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
+            (submitted || f['guestPhone'].touched) && f['guestPhone'].errors
+              ? 'outline-red-500'
+              : 'outline-slate-500'
+          }}"
+        />
+      </div>
+
+      <div class="space-y-2">
+        <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
+          <label
+            >Guest Room
+            <span *ngIf="f['guestRoom'].invalid" class="text-red-500"
+              >*</span
+            ></label
+          >
+          <span
+            *ngIf="
+              (submitted || f['guestRoom'].touched) && f['guestRoom'].errors
+            "
+            class="text-red-500"
+          >
+            (<ng-container *ngIf="f['guestRoom'].errors['required']"
+              >Guest Room is required</ng-container
+            >
+            <ng-container *ngIf="f['guestRoom'].errors['number']"
+              >Guest Room is invalid</ng-container
+            >)
+          </span>
+        </div>
+        <input
+          type="number"
+          formControlName="guestRoom"
+          id="guestRoom"
+          class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
+            (submitted || f['guestRoom'].touched) && f['guestRoom'].errors
+              ? 'outline-red-500'
+              : 'outline-slate-500'
+          }}"
+        />
+      </div>
+
+      <div class="space-x-2">
+        <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" />
+        <label
+          for="acceptTerms"
+          class="{{
+            (submitted || f['acceptTerms'].touched) && f['acceptTerms'].errors
+              ? 'text-red-500'
+              : ''
+          }}"
+          >I have read and agree to the Terms</label
+        >
+      </div>
     </div>
 
-    <div class="space-y-2">
-      <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
-        <label>Guest Phone</label>
-        <span *ngIf="submitted && f['guestPhone'].errors" class="text-red-500">
-          (<ng-container *ngIf="f['guestPhone'].errors['required']"
-            >Guest Phone is required</ng-container
-          >
-          <ng-container *ngIf="f['guestPhone'].errors['tel']"
-            >Guest Phone is invalid</ng-container
-          >)
-        </span>
-      </div>
-      <input
-        autocomplete="off"
-        type="tel"
-        formControlName="guestPhone"
-        id="guestPhone"
-        class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
-          submitted && f['guestPhone'].errors
-            ? 'outline-red-500'
-            : 'outline-slate-500'
-        }}"
-      />
-    </div>
-
-    <div class="space-y-2">
-      <div class="flex justify-between flex-wrap max-2xl:gap-1.5 2xl:gap-3">
-        <label>Guest Room</label>
-        <span *ngIf="submitted && f['guestRoom'].errors" class="text-red-500">
-          (<ng-container *ngIf="f['guestRoom'].errors['required']"
-            >Guest Room is required</ng-container
-          >
-          <ng-container *ngIf="f['guestRoom'].errors['number']"
-            >Guest Room is invalid</ng-container
-          >)
-        </span>
-      </div>
-      <input
-        type="number"
-        formControlName="guestRoom"
-        id="guestRoom"
-        class="w-full col-span-2 p-2 rounded-md outline outline-1 {{
-          submitted && f['guestRoom'].errors
-            ? 'outline-red-500'
-            : 'outline-slate-500'
-        }}"
-      />
-    </div>
-
-    <div class="space-x-2">
-      <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" />
-      <label
-        for="acceptTerms"
-        class="{{ submitted && f['acceptTerms'].errors ? 'text-red-500' : '' }}"
-        >I have read and agree to the Terms</label
+    <div class="flex gap-x-4 justify-end">
+      <button
+        type="button"
+        (click)="onReset()"
+        class="max-2xl:min-w-20 2xl:min-w-40 rounded-md p-2 outline outline-1 outline-red-500"
       >
+        Reset
+      </button>
+      <button
+        type="submit"
+        [disabled]="reservationForm.invalid"
+        class="max-2xl:min-w-20 2xl:min-w-40 rounded-md p-2 border border-teal-500 disabled:border-slate-400 disabled:bg-slate-400 disabled:text-slate-50"
+      >
+        Save
+      </button>
     </div>
-  </div>
-
-  <div class="flex gap-x-4 justify-end">
-    <button
-      type="button"
-      (click)="onReset()"
-      class="max-2xl:min-w-20 2xl:min-w-40 rounded-md p-2 outline outline-1 outline-red-500"
-    >
-      Reset
-    </button>
-    <button
-      type="submit"
-      [disabled]="reservationForm.invalid"
-      class="max-2xl:min-w-20 2xl:min-w-40 rounded-md p-2 border border-teal-500"
-    >
-      Save
-    </button>
-  </div>
-</form>
+  </form>
+</div>

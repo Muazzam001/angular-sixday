@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { appConstants } from '../../shared/constants/app-constants';
 import { StorageService } from '../../shared/services/storage.service';
-import { Appointment } from '../../models/appointment';
+import { Appointment } from '../../shared/models/appointment';
 
 @Component({
   selector: 'app-appointment-list',

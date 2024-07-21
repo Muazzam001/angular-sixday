@@ -5,6 +5,7 @@ import { ReservationFormComponent } from './reservation-form/reservation-form.co
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
 import { ReservationRoutingModule } from './reservation-routing.module';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     SharedModule,
+    RouterModule,
     ReactiveFormsModule,
     ReservationRoutingModule
   ]

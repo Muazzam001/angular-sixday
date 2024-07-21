@@ -45,7 +45,8 @@ export class StorageService {
   getlocalStorage(key: string): any {
     try {
       const item = localStorage.getItem(key);
-      return item != (null || undefined) ? JSON.parse(this.decrypt(item)!) : null;
+      // return item != (null || undefined) ? JSON.parse(this.decrypt(item)!) : null;
+      return item != (null || undefined) ? JSON.parse(item!) : null;
     } catch (e) {
       console.error('Error getting data from localStorage', e);
       return null;
@@ -54,7 +55,8 @@ export class StorageService {
 
   setlocalStorage(key: string, data: any): void {
     try {
-      localStorage.setItem(key, this.encrypt(JSON.stringify(data)));
+      // localStorage.setItem(key, this.encrypt(JSON.stringify(data)));
+      localStorage.setItem(key, JSON.stringify(data));
       this.storageSubject.next(key);
     } catch (e) {
       console.error('Error saving data to localStorage', e);

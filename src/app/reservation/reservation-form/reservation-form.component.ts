@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 import { StrongPasswordRegx } from 'src/app/shared/constants/regex';
+import { Reservation } from 'src/app/shared/models/reservation';
 import Validation from 'src/app/shared/utils/validation';
-import { dateRangeValidator } from 'src/app/shared/validators/dateRange';
+import { ReservationService } from './../reservation.service';
 
 @Component({
   selector: 'app-reservation-form',
@@ -24,9 +27,13 @@ export class ReservationFormComponent implements OnInit {
     },
   );
   submitted = false;
+  idUrlParam?: string;
 
   constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
+    private reservationService: ReservationService,
   ) {
 
   }
@@ -116,6 +123,16 @@ export class ReservationFormComponent implements OnInit {
         ],
       }
     );
+
+    this.idUrlParam = this.activatedRoute.snapshot.paramMap.get('id')!;
+
+    if (this.idUrlParam) {
+      let reservation: Reservation | undefined = this.reservationService.getReservation(this.idUrlParam);
+
+      if (reservation) {
+        this.reservationForm.patchValue(reservation);
+      }
+    }
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -126,12 +143,22 @@ export class ReservationFormComponent implements OnInit {
     this.submitted = true;
 
     if (this.reservationForm.valid) {
-      console.log('Form is valid');
-      console.log(JSON.stringify(this.reservationForm.value, null, 2));
+      // console.log('Form is valid', JSON.stringify(this.reservationForm.value, null, 2));
+      let reservation: Reservation = this.reservationForm.value;
+      console.log(reservation);
+
+      // if (reservation) {
+      //   reservation.id = this.idUrlParam!;
+      //   this.reservationService.updateReservation( reservation.id,reservation);
+      // } else {
+      //   this.reservationService.addReservation(reservation);
+      // }
+      this.reservationService.addReservation(reservation)
+      this.onReset();
+      this.router.navigate(['reservation/list']);
     }
     else {
-      console.log('Form is not valid');
-      console.log(JSON.stringify(this.reservationForm.value, null, 2));
+      console.log('Form is invalid', JSON.stringify(this.reservationForm.value, null, 2));
     }
 
   }
